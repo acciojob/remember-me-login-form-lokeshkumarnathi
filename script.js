@@ -1,34 +1,45 @@
-class Animal {
-  constructor(species) {
-    this._species = species;
-  }
 
-  get species() {
-    return this._species;
-  }
+const form = document.getElementById("loginForm");
+const username = document.getElementById("username");
+const password = document.getElementById("password");
+const checkbox = document.getElementById("checkbox");
+const existing = document.getElementById("existing");
 
-  makeSound() {
-    console.log(`The ${this.species} makes a sound`);
-  }
+// Check for saved credentials
+const savedUsername = localStorage.getItem("username");
+const savedPassword = localStorage.getItem("password");
+
+if (savedUsername && savedPassword) {
+  existing.style.display = "block";
 }
 
-class Cat extends Animal {
-  purr() {
-    console.log("purr");
+// Submit form
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const user = username.value;
+  const pass = password.value;
+
+  alert(`Logged in as ${user}`);
+
+  if (checkbox.checked) {
+    localStorage.setItem("username", user);
+    localStorage.setItem("password", pass);
+
+    existing.style.display = "block";
+  } else {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+
+    existing.style.display = "none";
   }
-}
+});
 
-class Dog extends Animal {
-  bark() {
-    console.log("woof");
+// Login as existing user
+existing.addEventListener("click", function() {
+  const savedUser = localStorage.getItem("username");
+
+  if (savedUser) {
+    alert(`Logged in as ${savedUser}`);
   }
-}
-
-// Example
-const myCat = new Cat("Siamese");
-myCat.makeSound();
-myCat.purr();
-
-const myDog = new Dog("Golden Retriever");
-myDog.makeSound();
-myDog.bark();
+});
