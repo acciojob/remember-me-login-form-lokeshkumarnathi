@@ -1,33 +1,30 @@
-//your JS code here. If required.
 class Animal {
-  private _species: string;
-
-  constructor(species: string) {
+  constructor(species) {
     this._species = species;
   }
 
-  get species(): string {
+  get species() {
     return this._species;
   }
 
-  makeSound(): void {
+  makeSound() {
     console.log(`The ${this.species} makes a sound`);
   }
 }
 
 class Cat extends Animal {
-  purr(): void {
+  purr() {
     console.log("purr");
   }
 }
 
 class Dog extends Animal {
-  bark(): void {
+  bark() {
     console.log("woof");
   }
 }
 
-// Example usage
+// Example
 const myCat = new Cat("Siamese");
 myCat.makeSound();
 myCat.purr();
